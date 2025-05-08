@@ -45,6 +45,7 @@ async function handleEmployeeUpdate(req: Request, params: { id: string }) {
     });
     return Response.json(updatedEmployee);
   } catch (error) {
+    console.error("Erro ao editar funcionário:", error);
     return Responses.notFound();
   }
 }
@@ -57,6 +58,7 @@ async function handleEmployeeDeletion(params: { id: string }) {
     await db.employee.delete({ where: { id: params.id } });
     return Responses.noContent();
   } catch (error) {
+    console.error("Erro ao deletar funcionário:", error);
     return Responses.notFound();
   }
 }

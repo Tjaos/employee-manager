@@ -3,7 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/prisma"; // <-- Aqui está a mudança
 
 const EmployeeSchema = z.object({
-  name: z.string().min(1),
+  name: z.string().min(3).max(50),
   cpf: z.string().length(11),
   imageUrl: z.string().url(),
 });
