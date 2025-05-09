@@ -69,7 +69,7 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  _: Request,
+  req: Request,
   { params }: { params: { id: string } }
 ) {
   return handleEmployeeDeletion(params);
