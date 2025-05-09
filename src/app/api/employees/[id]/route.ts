@@ -3,19 +3,17 @@ import { z } from "zod";
 
 // Schemas de validação
 const ParamsSchema = z.object({
-  id: z.string().uuid({ message: "ID deve ser um UUID válido" }),
+  id: z.string().uuid(),
 });
 
 const UpdateEmployeeSchema = z.object({
-  name: z.string().min(1, { message: "Nome não pode ser vazio" }).optional(),
-  cpf: z
-    .string()
-    .length(11, { message: "CPF deve ter 11 caracteres" })
-    .optional(),
-  imageUrl: z.string().url({ message: "URL da imagem inválida" }).optional(),
+  name: z.string().min(1).optional(),
+  cpf: z.string().length(11).optional(),
+  imageUrl: z.string().url().optional(),
+  role: z.string().min(1).optional(),
+  description: z.string().max(255).optional(),
 });
 
-// respostas
 const Responses = {
   invalidId: () => new Response("ID inválido", { status: 400 }),
   notFound: () => new Response("Funcionário não encontrado", { status: 404 }),
@@ -24,7 +22,7 @@ const Responses = {
   noContent: () => new Response(null, { status: 204 }),
 };
 
-// Handlers
+// HANDDLERS
 async function handleEmployeeUpdate(req: Request, params: { id: string }) {
   const idValidation = ParamsSchema.safeParse({ id: params.id });
   if (!idValidation.success) return Responses.invalidId();
@@ -62,7 +60,7 @@ async function handleEmployeeDeletion(params: { id: string }) {
   }
 }
 
-// Rotas exportadas
+// EXPORTA AS FUNÇÕES CRIADAS
 export async function PATCH(
   req: Request,
   { params }: { params: { id: string } }

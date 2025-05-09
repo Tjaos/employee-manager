@@ -10,6 +10,7 @@ import { db } from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import NewEmployeeForm from "./components/new-employee-form";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default async function EmployeesPage() {
   const employees = await db.employee.findMany({
@@ -33,30 +34,31 @@ export default async function EmployeesPage() {
           </SheetContent>
         </Sheet>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {employees.map((employee) => (
-          <Link
-            key={employee.id}
-            href={`/employees/${employee.id}`}
-            className="border rounded-md p-4 flex items-center gap-4 hover:shadow-md transition"
-          >
-            <Image
-              src={employee.imageUrl}
-              alt={employee.name}
-              width={64}
-              height={64}
-              className="rounded-full object-cover"
-            />
-            <div>
-              <p className="font-semibold">{employee.name}</p>
-              <p className="text-sm text-gray-500">{employee.cpf}</p>
-              <p>{employee.role}</p>
-              <p>{employee.description}</p>
-            </div>
-          </Link>
-        ))}
-      </div>
+      <ScrollArea className="">
+        <div className="p-3">
+          {employees.map((employee) => (
+            <Link
+              key={employee.id}
+              href={`/employees/${employee.id}`}
+              className="border rounded-md p-4 flex items-center gap-4 hover:shadow-md transition"
+            >
+              <Image
+                src={employee.imageUrl}
+                alt={employee.name}
+                width={64}
+                height={64}
+                className="rounded-full object-cover"
+              />
+              <div>
+                <p className="font-semibold">{employee.name}</p>
+                <p className="text-sm text-gray-500">{employee.cpf}</p>
+                <p>{employee.role}</p>
+                <p>{employee.description}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </ScrollArea>
     </div>
   );
 }
