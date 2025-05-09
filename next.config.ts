@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
 };
 module.exports = {
   images: {
-    domains: ["i.pravatar.cc"],
+    domains: ["i.pravatar.cc"], // Adicione o domínio da imagem
   },
 };
 

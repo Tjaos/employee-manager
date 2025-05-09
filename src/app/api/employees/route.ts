@@ -6,6 +6,8 @@ const EmployeeSchema = z.object({
   name: z.string().min(3).max(50),
   cpf: z.string().length(11),
   imageUrl: z.string().url(),
+  role: z.string().min(3).max(50),
+  description: z.string().max(100),
 });
 
 export async function GET() {

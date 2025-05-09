@@ -1,4 +1,3 @@
-// app/api/employees/[id]/route.ts
 import { db } from "@/lib/prisma";
 import { z } from "zod";
 
@@ -16,7 +15,7 @@ const UpdateEmployeeSchema = z.object({
   imageUrl: z.string().url({ message: "URL da imagem inválida" }).optional(),
 });
 
-// Utilitários de resposta
+// respostas
 const Responses = {
   invalidId: () => new Response("ID inválido", { status: 400 }),
   notFound: () => new Response("Funcionário não encontrado", { status: 404 }),

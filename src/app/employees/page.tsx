@@ -51,6 +51,8 @@ export default async function EmployeesPage() {
             <div>
               <p className="font-semibold">{employee.name}</p>
               <p className="text-sm text-gray-500">{employee.cpf}</p>
+              <p>{employee.role}</p>
+              <p>{employee.description}</p>
             </div>
           </Link>
         ))}
